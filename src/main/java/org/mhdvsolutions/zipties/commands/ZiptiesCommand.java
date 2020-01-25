@@ -65,11 +65,19 @@ public final class ZiptiesCommand implements CommandExecutor {
 
         switch (args[0]) {
             case "zipties":
+                if (!player.hasPermission("zipties.admin")) {
+                    Msg.config(player, Message.COMMANDS_PERMISSION);
+                    return true;
+                }
                 player.getInventory().addItem(api.getZiptieItem());
                 Msg.config(player, Message.COMMANDS_ZIPTIES);
                 return true;
 
             case "cutters":
+                if (!player.hasPermission("zipties.admin")) {
+                    Msg.config(player, Message.COMMANDS_PERMISSION);
+                    return true;
+                }
                 player.getInventory().addItem(api.getCuttersItem());
                 Msg.config(player, Message.COMMANDS_CUTTERS);
                 return true;

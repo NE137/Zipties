@@ -119,6 +119,10 @@ public final class PlayerInteract implements Listener {
                 @Override
                 public void run() {
                     // What you want to schedule goes here
+                    if(api.isRestrained(player.getUniqueId())) {
+                        Msg.config(player, Message.MESSAGES_RESTRAINFAIL);
+                        return;
+                    }
                     if (player.getLocation().distance(prisoner.getLocation()) <= radius) {
                         api.restrain(player, prisoner);
                         return;
@@ -136,7 +140,10 @@ public final class PlayerInteract implements Listener {
         if (itemStack.isSimilar(api.getCuttersItem()) && api.isRestrained(prisoner)) {
             event.setCancelled(true);
             UUID playerId = player.getUniqueId(), prisonerId = prisoner.getUniqueId();
-
+            if (api.isRestrained(playerId)) {
+                Msg.config(player, Message.MESSAGES_CANNOTDOTHAT);
+                return;
+            }
             if (!breakAttempts.containsKey(prisonerId) && !breakAttempts.containsKey(playerId)) {
                 breakAttempts.put(prisonerId, 0);
             }

@@ -23,6 +23,7 @@ messages:
     closer: '%prefix% &7You are not close enough to the detainee!'
     restrainfail: '%prefix% &7Restraint failed!'
     inprogress: '%prefix% &7You begin to attempt tying &a%prisoner%&7!'
+    cannotdothat: '%prefix% &cYou can''t do that right now.'
   restrained:
     already: '%prefix% &cThat player is already restrained!'
     self: '%prefix% &7You have restrained &a%prisoner%&7!'

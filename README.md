@@ -2,7 +2,7 @@
 
 Attempt at completing the Zipties plugin made by [Mishyy](https://github.com/Mishyy/Zipties)\
 *(Mitch wrote the large majority of the code, I simply finished what he started.)*\
-A pre-compiled build is available to you [here](https://github.com/celerry/Zipties/releases/), or you can build it yourself with gradle.
+A pre-compiled build is available to you on the releases tab, or you can build it yourself with gradle.
 
 ## Crafting!
 Can be turned off or on in config.yml
@@ -65,7 +65,7 @@ tieTime: 20
 ## Permissions
 * zipties.use - use zipties
 * zipties.bypass - blocks you from getting ziptied
-* zipties.admin - allows you to use /zipties release <player>
+* zipties.admin - allows you to use /zipties release <player>, /zipties zipties, and /zipties cutters
 
 ### Other things you should know
 * Everybody can release others using cutters.
