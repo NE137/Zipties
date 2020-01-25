@@ -141,11 +141,11 @@ public final class PrisonerManager implements ZiptiesApi {
         pig.setCustomName("Restraint Pig-" + ThreadLocalRandom.current().nextInt(1, Integer.MAX_VALUE));
         pig.addPotionEffect(INVIS_EFFECT, true);
         pig.setCustomNameVisible(false);
-        //pig.setLeashHolder(restrainer);
+        pig.setLeashHolder(restrainer);
         pig.addPassenger(prisoner);
         pig.setInvulnerable(true);
         pig.setSilent(true);
-        pig.setAI(false);
+        pig.setAI(true);
         pig.setBaby();
         pigs.put(prisoner.getUniqueId(), pig);
         prisoner.addPotionEffect(WEAKNESS_EFFECT);

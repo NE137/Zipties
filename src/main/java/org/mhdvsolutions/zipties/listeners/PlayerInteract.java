@@ -113,6 +113,7 @@ public final class PlayerInteract implements Listener {
             }
             event.setCancelled(true);
             Msg.config(player, Message.MESSAGES_INPROGRESS, "%prisoner%", prisoner.getName());
+            Msg.config(prisoner, Message.MESSAGES_BEGIN, "%restrainer%", player.getName());
             // Create the task anonymously and schedule to run it once, after 20 ticks
             new BukkitRunnable() {
 

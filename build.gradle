@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'org.mhdvsolutions'
-version '1.0.2.1'
+version '1.1.0'
 
 sourceCompatibility = 1.8
 

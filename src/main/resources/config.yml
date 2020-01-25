@@ -24,6 +24,7 @@ messages:
     restrainfail: '%prefix% &7Restraint failed!'
     inprogress: '%prefix% &7You begin to attempt tying &a%prisoner%&7!'
     cannotdothat: '%prefix% &cYou can''t do that right now.'
+    begin: '%prefix% &a%restrainer%&7 has began restraining you!'
   restrained:
     already: '%prefix% &cThat player is already restrained!'
     self: '%prefix% &7You have restrained &a%prisoner%&7!'
@@ -34,7 +35,7 @@ messages:
     restrainer: '%prefix% &7You have released &a%prisoner%&7!'
     prisoner: '%prefix% &7You have been released!'
   escaped:
-    restrainer: '%prefix% &a%prisoner% &7has broken out of your restrained!'
+    restrainer: '%prefix% &a%prisoner% &7has broken out of your restraints!'
     prisoner: '%prefix% &7You have broken out of your restraints!'
     almost: '%prefix% &a%progress% &7of the restraints are broken!'
     free: '%prefix% &7You have broken &a%prisoner% &7free!'

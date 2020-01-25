@@ -102,24 +102,21 @@ public final class Escape implements Listener {
     }
 
     @EventHandler
-    public void onLeashBreak(PlayerUnleashEntityEvent event) {
+    public void onLeashBreak(EntityUnleashEvent event) {
         if (!(event.getEntity() instanceof Pig)) {
             return;
         }
-
+        /*
         Pig pig = (Pig) event.getEntity();
         if (!pig.getName().startsWith("Restraint Pig") || pig.isDead()) {
-            Player player = event.getPlayer();
+            Player player = (Player) event.getEntity().getPassengers().get(new Integer(0));
             api.release(player, ReleaseType.OTHER);
             return;
-        }
+        } */
 
-        Player player = event.getPlayer();
+        Player player = (Player) event.getEntity().getPassengers().get(new Integer(0));
         if (api.isRestrained(player)) {
-            event.setCancelled(true);
-            if (event.getReason() == EntityUnleashEvent.UnleashReason.HOLDER_GONE) {
-                api.release(player, ReleaseType.OTHER);
-            }
+            api.release(player, ReleaseType.OTHER);
         }
     }
 
