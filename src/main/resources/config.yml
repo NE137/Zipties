@@ -16,7 +16,7 @@ messages:
     help: |-
       %prefix% &7Zipties v&a${version}
       %prefix% &a/%cmd% [help] &7Displays this help message.
-      %prefix% &a/%cmd% release [player] &7Releases the player from the restraints you put on them.
+      %prefix% &a/%cmd% release [player] &7Releases the player from any restraints. Administrator command!
   messages:
     cooldown: '%prefix% &7You must wait &a%cooldown% &7more seconds before your next attempt!'
     escapefail: '%prefix% &7Your escape attempt failed'
