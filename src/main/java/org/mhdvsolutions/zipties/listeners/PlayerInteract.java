@@ -40,11 +40,12 @@ import org.mhdvsolutions.zipties.api.ZiptiesApi;
 import org.mhdvsolutions.zipties.utils.Message;
 import org.mhdvsolutions.zipties.utils.Msg;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public final class PlayerInteract implements Listener {
-
-    private static final HashBasedTable<UUID, UUID, Integer> breakAttempts = HashBasedTable.create();
+    
+    private static final HashMap<UUID, Integer> breakAttempts = new HashMap<UUID, Integer>();
     private static final HashBasedTable<UUID, UUID, Integer> loggedWhile = HashBasedTable.create();
 
     private final Zipties plugin;
@@ -136,19 +137,19 @@ public final class PlayerInteract implements Listener {
             event.setCancelled(true);
             UUID playerId = player.getUniqueId(), prisonerId = prisoner.getUniqueId();
 
-            if (!breakAttempts.containsRow(prisonerId)) {
-                breakAttempts.put(prisonerId, playerId, 0);
+            if (!breakAttempts.containsKey(prisonerId) && !breakAttempts.containsKey(playerId)) {
+                breakAttempts.put(prisonerId, 0);
             }
 
             long count = plugin.getConfig().getInt("cutters.count");
-            int attempt = breakAttempts.get(prisonerId, playerId);
+            int attempt = breakAttempts.get(prisonerId);
             if (attempt < count) {
                 if (++attempt == count) {
                     Msg.config(player, Message.ESCAPED_FREE, "%prisoner%", prisoner.getName());
                     api.release(prisoner, ReleaseType.OTHER);
-                    breakAttempts.rowMap().remove(prisonerId);
+                    breakAttempts.remove(prisonerId);
                 } else {
-                    breakAttempts.put(prisonerId, playerId, attempt);
+                    breakAttempts.put(prisonerId, attempt);
                     Msg.config(player, Message.ESCAPED_ALMOST,"%progress%", (attempt+"/"+count));
                 }
             }
