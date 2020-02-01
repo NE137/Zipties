@@ -17,3 +17,5 @@ Can be turned off or on in config.yml
 * Everybody can release others using cutters.
 * Everybody can escape zipties by tapping SNEAK button while tied up. (It's a very small chance of success though)
 * Prisoners are given Weakness when they're tied and removed of weakness when they are released.
+* You can only restrain 1 person at a time.
+* You can leave people on the floor by shift and right clicking them while holding an item, and pick them back up by shift and right clicking again!
