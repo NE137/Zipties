@@ -1,28 +1,8 @@
-/*
- * Zipties - Player restraint system.
- * Copyright (c) 2018, Mitchell Cook <https://github.com/Mishyy>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 package org.mhdvsolutions.zipties.listeners;
 
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,7 +26,9 @@ import java.util.UUID;
 public final class PlayerInteract implements Listener {
     
     private static final HashMap<UUID, Integer> breakAttempts = new HashMap<UUID, Integer>();
+    public static HashMap<UUID, Integer> haveRestrained = new HashMap<UUID, Integer>();
     private static final HashBasedTable<UUID, UUID, Integer> loggedWhile = HashBasedTable.create();
+    private static final HashBasedTable<UUID, UUID, Integer> currentlySitting = HashBasedTable.create();
 
     private final Zipties plugin;
     private final ZiptiesApi api;
@@ -61,7 +43,6 @@ public final class PlayerInteract implements Listener {
         UUID prisonerId = player.getUniqueId();
         if (api.isRestrained(player)) {
             api.release(player, ReleaseType.OTHER);
-            loggedWhile.put(prisonerId, prisonerId, 0);
         }
     }
     @EventHandler
@@ -71,6 +52,7 @@ public final class PlayerInteract implements Listener {
         if (api.isRestrained(player)) {
             api.release(player, ReleaseType.OTHER);
             loggedWhile.put(prisonerId, prisonerId, 0);
+            return;
         }
     }
     @EventHandler
@@ -94,27 +76,60 @@ public final class PlayerInteract implements Listener {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return;
         }
-
-        if (itemStack.isSimilar(api.getZiptieItem())
-                && player.hasPermission("zipties.use")
-                && !prisoner.hasPermission("zipties.bypass")) {
+        if (player.isSneaking()) {
             if(api.isRestrained(player)) {
-                Msg.config(player, Message.RESTRAINED_ISALREADY);
+                Msg.config(player, Message.RESTRAINED_ISALREADYRESTRAINED);
                 return;
             }
             if(api.isRestrained(prisoner)) {
-                Msg.config(player, Message.RESTRAINED_ALREADY);
+                if(api.getRestrainedBy(prisoner.getUniqueId()) == player.getUniqueId()) {
+                    UUID prisonerId = prisoner.getUniqueId();
+                    if (currentlySitting.containsRow(prisonerId)) {
+                        currentlySitting.rowMap().remove(prisonerId);
+                        api.standup(player, prisoner);
+                        return;
+                    } else {
+                        currentlySitting.put(prisonerId,prisonerId,0);
+                        api.sit(player,prisoner);
+                        return;
+                    }
+                }
                 return;
             }
-            double radius = 4D; // whatever you want really
+            return;
+        }
+
+        if (itemStack.isSimilar(api.getZiptieItem())
+                && !prisoner.hasPermission("zipties.bypass")) {
+            if(api.isRestrained(player)) {
+                Msg.config(player, Message.RESTRAINED_ISALREADYRESTRAINED);
+                return;
+            }
+            if (haveRestrained.containsKey(player.getUniqueId())) {
+                Msg.config(player, Message.RESTRAINED_ALREADYHAVE);
+                return;
+            }
+            if(api.isRestrained(prisoner)) {
+                Msg.config(player, Message.RESTRAINED_ALREADYOTHER);
+                return;
+            }
+            if (Zipties.getPlugin().getConfig().getBoolean("settings.ziptiesUsePermission") == true) {
+                if (!player.hasPermission("zipties.use")) {
+                    Msg.config(player, Message.COMMANDS_PERMISSION);
+                    return;
+                }
+            }
+            haveRestrained.put(player.getUniqueId(), 0);
+            double radius = 4D;
             if (!(player.getLocation().distance(prisoner.getLocation()) <= radius)) {
                 Msg.config(player, Message.MESSAGES_CLOSER);
                 return;
             }
+
             event.setCancelled(true);
             Msg.config(player, Message.MESSAGES_INPROGRESS, "%prisoner%", prisoner.getName());
             Msg.config(prisoner, Message.MESSAGES_BEGIN, "%restrainer%", player.getName());
-            // Create the task anonymously and schedule to run it once, after 20 ticks
+            // Create the task anonymously and schedule to run it once, after x ticks
             new BukkitRunnable() {
 
                 @Override
@@ -126,15 +141,19 @@ public final class PlayerInteract implements Listener {
                     }
                     if (player.getLocation().distance(prisoner.getLocation()) <= radius) {
                         api.restrain(player, prisoner);
+                        if (player.getInventory().getItemInMainHand().isSimilar(api.getZiptieItem()) && Zipties.getPlugin().getConfig().getBoolean("settings.removeOnUse") == true) {
+                            player.getInventory().setItemInMainHand(new ItemStack(Material.AIR, 1));
+                        }
                         return;
                     }
                     else {
                         Msg.config(player, Message.MESSAGES_RESTRAINFAIL);
+                        haveRestrained.remove(player.getUniqueId());
                         return;
                     }
                 }
 
-            }.runTaskLater(this.plugin, plugin.getConfig().getInt("tieTime"));
+            }.runTaskLater(this.plugin, plugin.getConfig().getInt("settings.tieTime"));
             return;
         }
 
@@ -156,6 +175,9 @@ public final class PlayerInteract implements Listener {
                     Msg.config(player, Message.ESCAPED_FREE, "%prisoner%", prisoner.getName());
                     api.release(prisoner, ReleaseType.OTHER);
                     breakAttempts.remove(prisonerId);
+                    if (player.getInventory().getItemInMainHand().isSimilar(api.getCuttersItem()) && Zipties.getPlugin().getConfig().getBoolean("settings.removeOnUse") == true) {
+                        player.getInventory().setItemInMainHand(new ItemStack(Material.AIR, 1));
+                    }
                 } else {
                     breakAttempts.put(prisonerId, attempt);
                     Msg.config(player, Message.ESCAPED_ALMOST,"%progress%", (attempt+"/"+count));

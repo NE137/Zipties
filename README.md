@@ -1,15 +1,15 @@
 # Zipties - for MC 1.12.2
 
-Attempt at completing the Zipties plugin made by [Mishyy](https://github.com/Mishyy/Zipties)\
-*(Mitch wrote the large majority of the code, I simply finished what he started.)*\
 A pre-compiled build is available to you on the releases tab, or you can build it yourself with gradle.
+
+MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!
 
 ## Crafting!
 Can be turned off or on in config.yml
 
-![Crafting Recipes](https://i.imgur.com/HoOwr1o.png "Crafting recipes")
+![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
 ## Permissions
-* zipties.use - use zipties
+* zipties.use - use zipties --- can be toggled in config.yml
 * zipties.bypass - blocks you from getting ziptied
 * zipties.admin - allows you to use /zipties release, /zipties zipties, and /zipties cutters
 

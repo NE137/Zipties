@@ -6,6 +6,9 @@
 # Everybody can release using cutters.
 #
 
+# SEMI-IMPORTANT:
+# Don't try and use %placeholders% unless they're already written in the config message on default or it won't work. %prefix% works anywhere though.
+
 messages:
   prefix: '&2&lZipties &8»'
   commands:
@@ -26,11 +29,15 @@ messages:
     cannotdothat: '%prefix% &cYou can''t do that right now.'
     begin: '%prefix% &a%restrainer%&7 has began restraining you!'
   restrained:
-    already: '%prefix% &cThat player is already restrained!'
+    alreadyhave: '%prefix% &cYou have already restrained somebody!'
+    alreadyother: '%prefix% &cThat player is already restrained!'
     self: '%prefix% &7You have restrained &a%prisoner%&7!'
     other: '%prefix% &7You have been restrained by &a%restrainer%&7!'
-    isalready: '%prefix% &cYou are restrained, so cannot restrain others!'
+    isalreadyrestrained: '%prefix% &cYou are restrained, so cannot do that!'
     left: '%prefix% &7You disconnected while restrained, so you died!'
+    nowsitting: '%prefix% &7You''re no longer dragging &a%prisoner%&7!'
+    notsitting: '%prefix% &7You''re dragging &a%prisoner%&7 now!'
+    notonground: '%prefix% &a%prisoner%&c is not on the ground!'
   released:
     restrainer: '%prefix% &7You have released &a%prisoner%&7!'
     prisoner: '%prefix% &7You have been released!'
@@ -40,6 +47,7 @@ messages:
     almost: '%prefix% &a%progress% &7of the restraints are broken!'
     free: '%prefix% &7You have broken &a%prisoner% &7free!'
 
+# Set these to non-stackable items! This is VERY important!
 items:
   zipties:
     type: 'GOLD_HOE'
@@ -54,8 +62,13 @@ cutters:
   # How many clicks do cutters need to remove zipties?
   count: 10
 
-# Allow crafting of zipties & cutters?
-crafting: true
-# Time, in ticks, it takes to tie someone with zipties.
-# 20 = 1 second (at 20TPS)
-tieTime: 20
+settings:
+  # Allow crafting of zipties & cutters?
+  crafting: true
+  # Time, in ticks, it takes to tie someone with zipties.
+  # 20 = 1 second
+  tieTime: 20
+  # Should Zipties and Cutters be removed after use?
+  removeOnUse: true
+  # Should players require the zipties.use permission to restrain others?
+  ziptiesUsePermission: true

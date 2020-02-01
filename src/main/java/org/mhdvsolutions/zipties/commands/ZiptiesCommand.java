@@ -1,25 +1,3 @@
-/*
- * Zipties - Player restraint system.
- * Copyright (c) 2018, Mitchell Cook <https://github.com/Mishyy>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 package org.mhdvsolutions.zipties.commands;
 
 import org.bukkit.Bukkit;
@@ -28,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.mhdvsolutions.zipties.PrisonerManager;
 import org.mhdvsolutions.zipties.Zipties;
 import org.mhdvsolutions.zipties.api.ReleaseType;
 import org.mhdvsolutions.zipties.api.ZiptiesApi;
@@ -72,7 +51,6 @@ public final class ZiptiesCommand implements CommandExecutor {
                 player.getInventory().addItem(api.getZiptieItem());
                 Msg.config(player, Message.COMMANDS_ZIPTIES);
                 return true;
-
             case "cutters":
                 if (!player.hasPermission("zipties.admin")) {
                     Msg.config(player, Message.COMMANDS_PERMISSION);
@@ -82,7 +60,7 @@ public final class ZiptiesCommand implements CommandExecutor {
                 Msg.config(player, Message.COMMANDS_CUTTERS);
                 return true;
             case "credit":
-                String msg = color(("%prefix% &7Developers:\n&8* &aMishyy - &b&nhttps://github.com/Mishyy\n&8* &acelerry - &b&nhttps://github.com/celerry").replace("%prefix%", Message.PREFIX.toString()));
+                String msg = color(("%prefix% &7Credit\n&aThis is a fork of Mishyy's Zipties proof of concept:\n &bhttps://github.com/Mishyy/Zipties\n&aForked & completed by celerry:\n &bhttps://github.com/celerry\n &bhttps://www.spigotmc.org/members/celerry.860890/").replace("%prefix%", Message.PREFIX.toString()));
                 NEW_LINE.splitAsStream(msg).forEach(player::sendMessage);
                 return true;
             case "release":

@@ -1,25 +1,3 @@
-/*
- * Zipties - Player restraint system.
- * Copyright (c) 2018, Mitchell Cook <https://github.com/Mishyy>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 package org.mhdvsolutions.zipties;
 
 import com.google.common.collect.HashMultimap;
@@ -32,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -41,6 +20,7 @@ import org.mhdvsolutions.zipties.api.ReleaseType;
 import org.mhdvsolutions.zipties.api.ZiptiesApi;
 import org.mhdvsolutions.zipties.api.events.PrisonerReleaseEvent;
 import org.mhdvsolutions.zipties.api.events.PrisonerRestrainEvent;
+import org.mhdvsolutions.zipties.listeners.PlayerInteract;
 import org.mhdvsolutions.zipties.utils.Message;
 import org.mhdvsolutions.zipties.utils.Msg;
 
@@ -64,7 +44,9 @@ public final class PrisonerManager implements ZiptiesApi {
     );
     private final Zipties plugin;
     private final SetMultimap<UUID, UUID> prisoners = HashMultimap.create();
-    private final Map<UUID, Pig> pigs = new HashMap<>();
+    private final SetMultimap<UUID, UUID> satDownPrisoners = HashMultimap.create();
+    private final SetMultimap<UUID, UUID> beingSatDownPrisoners = HashMultimap.create();
+    private static final Map<UUID, Pig> pigs = new HashMap<>();
 
     PrisonerManager(Zipties plugin) {
         this.plugin = plugin;
@@ -110,7 +92,6 @@ public final class PrisonerManager implements ZiptiesApi {
     public boolean isRestrained(UUID uuid) {
         return prisoners.values().stream().anyMatch(uuid::equals);
     }
-
     @Override
     public UUID getRestrainedBy(UUID uuid) {
         if (!isRestrained(uuid)) {
@@ -133,7 +114,7 @@ public final class PrisonerManager implements ZiptiesApi {
         }
 
         if (isRestrained(prisoner)) {
-            Msg.config(restrainer, Message.RESTRAINED_ALREADY, "%prisoner%", prisoner.getName());
+            Msg.config(restrainer, Message.RESTRAINED_ALREADYOTHER, "%prisoner%", prisoner.getName());
             return;
         }
 
@@ -153,13 +134,32 @@ public final class PrisonerManager implements ZiptiesApi {
         Msg.config(restrainer, Message.RESTRAINED_SELF, "%prisoner%", prisoner.getName());
         Msg.config(prisoner, Message.RESTRAINED_OTHER, "%restrainer%", restrainer.getName());
     }
-
+    @Override
+    public void sit(Player restrainer, Player player) {
+        PrisonerManager.getPig(player).ifPresent(pig -> {
+            if(!pig.isOnGround()) {
+                Msg.config(restrainer, Message.RESTRAINED_NOTONGROUND, "%prisoner%", player.getName());
+                return;
+            }
+            pig.setAI(false);
+            pig.setLeashHolder(null);
+            Msg.config(restrainer, Message.RESTRAINED_NOWSITTING, "%prisoner%", player.getName());
+        });
+    }
+    @Override
+    public void standup(Player restrainer, Player player) {
+        PrisonerManager.getPig(player).ifPresent(pig -> {
+            pig.setLeashHolder(restrainer);
+            pig.setAI(true);
+            Msg.config(restrainer, Message.RESTRAINED_NOTSITTING, "%prisoner%", player.getName());
+        });
+    }
     @Override
     public void release(Player player, ReleaseType type) {
         if (!isRestrained(player)) {
             return;
         }
-
+        PlayerInteract.haveRestrained.remove(getRestrainedBy(player.getUniqueId()));
         UUID restrainerUuid = getRestrainedBy(player);
         Player restrainer = Bukkit.getPlayer(restrainerUuid);
 
@@ -182,7 +182,6 @@ public final class PrisonerManager implements ZiptiesApi {
         }
         Msg.config(player, escaped ? Message.ESCAPED_PRISONER : Message.RELEASED_PRISONER);
     }
-
     @Override
     public void clean() {
         prisoners.entries().forEach(entry -> {
@@ -196,8 +195,8 @@ public final class PrisonerManager implements ZiptiesApi {
         pigs.clear();
     }
 
-    private Optional<Pig> getPig(Player player) {
-        return Optional.ofNullable(pigs.get(player.getUniqueId()));
+    public static Optional<Pig> getPig(Player player) {
+        return Optional.ofNullable(PrisonerManager.pigs.get(player.getUniqueId()));
     }
 
 }
