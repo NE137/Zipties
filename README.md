@@ -5,7 +5,7 @@ A pre-compiled build is available to you on the releases tab, or you can build i
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!
 
 ## Crafting!
-Can be turned off or on in config.yml
+Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
 
 ![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
 ## Permissions
