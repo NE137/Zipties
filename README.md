@@ -2,8 +2,8 @@
 
 A pre-compiled build is available to you on the releases tab, or you can build it yourself with gradle.
 
-MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!
-Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties]
+MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
+Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
 
 ## Crafting!
 Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
