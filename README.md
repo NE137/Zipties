@@ -13,7 +13,7 @@ Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/
 
 ![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
 ## Permissions
-* zipties.use - use zipties --- can be toggled in config.yml
+* zipties.use - use zipties --- permission requirement can be toggled in config.yml to allow everyone to use, no matter what.
 * zipties.bypass - blocks you from getting ziptied
 * zipties.admin - allows you to use /zipties release, /zipties zipties, and /zipties cutters
 
