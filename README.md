@@ -8,6 +8,8 @@ See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts)
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
 Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
 
+Default configuration defaults to the Handcuffs model from the [VindexCraft.Net Resource Pack](https://www.vindexcraft.net/download)
+
 ## Crafting!
 Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
 
