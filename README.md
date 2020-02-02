@@ -25,6 +25,6 @@ Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/
 * You can leave people on the floor by shift and right clicking them while holding an item, and pick them back up by shift and right clicking again!
 
 
-## Find bugs?
+## Find bugs or want something changed/implemented?
 
 Make an issue on this repo [here](https://github.com/celerry/Zipties/issues) or contact me on discord: **Clarke#3608**
