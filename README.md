@@ -3,6 +3,8 @@
 ## [Download the latest release!](https://github.com/celerry/Zipties/releases/latest)
 A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases/latest) tab, or you can build it yourself with gradle.
 
+See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts)
+
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
 Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
 
