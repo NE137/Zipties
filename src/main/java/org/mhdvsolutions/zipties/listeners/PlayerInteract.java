@@ -124,6 +124,7 @@ public final class PlayerInteract implements Listener {
             double radius = 4D;
             if (!(player.getLocation().distance(prisoner.getLocation()) <= radius)) {
                 Msg.config(player, Message.MESSAGES_CLOSER);
+                haveRestrained.remove(player.getUniqueId());
                 return;
             }
 
