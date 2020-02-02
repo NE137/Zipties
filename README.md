@@ -21,3 +21,8 @@ Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/
 * Prisoners are given Weakness when they're tied and removed of weakness when they are released.
 * You can only restrain 1 person at a time.
 * You can leave people on the floor by shift and right clicking them while holding an item, and pick them back up by shift and right clicking again!
+
+
+## Find bugs?
+
+Make an issue on this repo [here](https://github.com/celerry/Zipties/issues) or contact me on discord: **Clarke#3608**
