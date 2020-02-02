@@ -1,7 +1,7 @@
 # Zipties - for MC 1.12.2
 
-## [Download the latest release!](https://github.com/celerry/Zipties/releases)
-A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases) tab, or you can build it yourself with gradle.
+## [Download the latest release!](https://github.com/celerry/Zipties/releases/latest)
+A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases/latest) tab, or you can build it yourself with gradle.
 
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
 Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
