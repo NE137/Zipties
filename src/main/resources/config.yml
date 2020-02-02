@@ -28,6 +28,7 @@ messages:
     inprogress: '%prefix% &7You begin to attempt tying &a%prisoner%&7!'
     cannotdothat: '%prefix% &cYou can''t do that right now.'
     begin: '%prefix% &a%restrainer%&7 has began restraining you!'
+    beingrestrained: '&7You''re being restrained!'
   restrained:
     alreadyhave: '%prefix% &cYou have already restrained somebody!'
     alreadyother: '%prefix% &cThat player is already restrained!'

@@ -3,6 +3,7 @@ package org.mhdvsolutions.zipties.listeners;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -129,6 +130,7 @@ public final class PlayerInteract implements Listener {
             event.setCancelled(true);
             Msg.config(player, Message.MESSAGES_INPROGRESS, "%prisoner%", prisoner.getName());
             Msg.config(prisoner, Message.MESSAGES_BEGIN, "%restrainer%", player.getName());
+            prisoner.sendTitle(ChatColor.RED + "" + ChatColor.BOLD + "!", Escape.color(String.valueOf(Message.MESSAGES_BEINGRESTRAINED)), 5, 80,5);
             // Create the task anonymously and schedule to run it once, after x ticks
             new BukkitRunnable() {
 
