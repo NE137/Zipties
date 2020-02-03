@@ -29,6 +29,7 @@ messages:
     cannotdothat: '%prefix% &cYou can''t do that right now.'
     begin: '%prefix% &a%restrainer%&7 has began restraining you!'
     beingrestrained: '&7You''re being restrained!'
+    healthtoohigh: '%prefix% &a%prisoner%&c''s health is too high!'
   restrained:
     alreadyhave: '%prefix% &cYou have already restrained somebody!'
     alreadyother: '%prefix% &cThat player is already restrained!'
@@ -73,3 +74,7 @@ settings:
   removeOnUse: true
   # Should players require the zipties.use permission to restrain others?
   ziptiesUsePermission: true
+  # Toggle whether players must be on "required" health to be tied (20 = 10 hearts)
+  # Default is 15 (3/4)
+  healthNerf: true
+  required: 15

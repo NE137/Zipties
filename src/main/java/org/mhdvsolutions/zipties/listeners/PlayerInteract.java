@@ -120,6 +120,14 @@ public final class PlayerInteract implements Listener {
                     return;
                 }
             }
+            if (Zipties.getPlugin().getConfig().getBoolean("settings.healthNerf") == true) {
+                double required = Zipties.getPlugin().getConfig().getDouble("settings.required");
+                double health = prisoner.getHealth();
+                if (health > required) {
+                    Msg.config(player, Message.MESSAGES_HEALTHTOOHIGH, "%prisoner%", prisoner.getName());
+                    return;
+                }
+            }
             haveRestrained.put(player.getUniqueId(), 0);
             double radius = 4D;
             if (!(player.getLocation().distance(prisoner.getLocation()) <= radius)) {
