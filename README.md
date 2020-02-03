@@ -3,7 +3,7 @@
 ## [Download the latest release!](https://github.com/celerry/Zipties/releases/latest)
 A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases/latest) tab, or you can build it yourself with gradle.
 
-See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts)
+See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts). (This would probably need some sort of stun gun so people can't just run away when they're being restrained, probably not though... roleplay I guess :P)
 
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
 Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
