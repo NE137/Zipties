@@ -6,12 +6,12 @@ A pre-compiled build is available to you on the [releases](https://github.com/ce
 See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts).
 
 MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
-Highly expanded fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
+Fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
 
 Default configuration defaults to the Handcuffs model from the [VindexCraft.Net Resource Pack](https://www.vindexcraft.net)
 
 ## Crafting!
-Can be turned off or on in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
+Can be turned on or off in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
 
 ![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
 ## Permissions
