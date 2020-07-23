@@ -2,15 +2,12 @@
 
 ## [Download the latest release!](https://github.com/celerry/Zipties/releases/latest)
 A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases/latest) tab, or you can build it yourself with gradle.
-
 See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts).
-
-MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions!\
-Fork of [Mishyy's Zipties concept!](https://github.com/Mishyy/Zipties)
+MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions. Fork of [Mishyy's Zipties concept.](https://github.com/Mishyy/Zipties)
 
 Default configuration defaults to the Handcuffs model from the [VindexCraft.Net Resource Pack](https://www.vindexcraft.net)
 
-## Crafting!
+## Crafting
 Can be turned on or off in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
 
 ![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
@@ -29,4 +26,4 @@ Can be turned on or off in [config.yml](https://github.com/celerry/Zipties/blob/
 
 ## Find bugs or want something changed/implemented?
 
-Make an issue on this repo [here](https://github.com/celerry/Zipties/issues)
+Sorry, but I no longer maintain this project. Consider making a fork :)
