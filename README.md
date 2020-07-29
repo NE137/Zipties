@@ -1,17 +1,14 @@
-# Zipties - for MC 1.12.2
+# Zipties
 
-## [Download the latest release!](https://github.com/celerry/Zipties/releases/latest)
-A pre-compiled build is available to you on the [releases](https://github.com/celerry/Zipties/releases/latest) tab, or you can build it yourself with gradle.
-See a demonstration video [here!](https://www.youtube.com/watch?v=Z53n6VGf5Ts).
-MIT Licensed. Please read the [License](https://github.com/celerry/Zipties/blob/master/LICENSE) for attributions. Fork of [Mishyy's Zipties concept.](https://github.com/Mishyy/Zipties)
+See a demonstration video [here](https://www.youtube.com/watch?v=Z53n6VGf5Ts).
+This is a modified version of [Mishyy's](https://github.com/Mishyy) Zipties plugin. (Adds more functionality, etc)
 
-Default configuration defaults to the Handcuffs model from the [VindexCraft.Net Resource Pack](https://www.vindexcraft.net)
-
-## Crafting
+## Usage
+### Crafting
 Can be turned on or off in [config.yml](https://github.com/celerry/Zipties/blob/master/src/main/resources/config.yml)
 
-![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/github/crafting.png?raw=true "Crafting recipes")
-## Permissions
+![Crafting Recipes](https://github.com/celerry/Zipties/blob/master/assets/crafting.png?raw=true "Crafting recipes")
+### Permissions
 * zipties.use - use zipties --- permission requirement can be toggled in config.yml to allow everyone to use, no matter what.
 * zipties.bypass - blocks you from getting ziptied
 * zipties.admin - allows you to use /zipties release, /zipties zipties, and /zipties cutters
