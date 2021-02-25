@@ -102,6 +102,9 @@ public final class PlayerInteract implements Listener {
 
         if (itemStack.isSimilar(api.getZiptieItem())
                 && !prisoner.hasPermission("zipties.bypass")) {
+            if(prisoner.hasMetadata("NPC")) {
+                return;
+            }            
             if(api.isRestrained(player)) {
                 Msg.config(player, Message.RESTRAINED_ISALREADYRESTRAINED);
                 return;
